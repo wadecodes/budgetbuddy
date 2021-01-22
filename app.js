@@ -1,11 +1,13 @@
+//Stores budget data and calculate the budget total and budget percentages etc
 var budgetController = (function () {
-
+//Function Constructors
     var Expense = function (id, description, value) {
         this.id = id;
         this.description = description;
         this.value = value;
         this.percentage = -1;
     };
+    //Expense prototype function which is saved in Expense constructor and its child can access the prototype functions 
     Expense.prototype.setPercentage = function (totalInc) {
         if (totalInc > 0) {
             this.percentage = Math.round((this.value / totalInc) * 100);
@@ -22,6 +24,7 @@ var budgetController = (function () {
         this.description = description;
         this.value = value;
     };
+    //Function to calculate the total of expsenses and incomes. here type = inc or exp
     var calcTotal = function (type) {
         var sum = 0;
         data.allItems[type].forEach(function (element) {
@@ -29,6 +32,8 @@ var budgetController = (function () {
         });
         data.total[type] = sum;
     }
+
+    // data structure for storing all the data.
     var data = {
         allItems: {
             exp: [],
@@ -41,7 +46,7 @@ var budgetController = (function () {
         budget: 0,
         percentage: -1
     }
-
+//return functions which are shared with outer scope objects(functions, objects, array) and primitivies
     return {
         addItem: function (type, description, value) {
             var newItem, id;
@@ -229,7 +234,7 @@ var controller = (function (budgetCtrl, UICtrl) {
     var DOM = UICtrl.getDOMstrings();
 
     var eventListener = function () {
-        document.querySelector(DOM.inputBtn).addEventListener("click", ctrlAddItem);
+         document.querySelector(DOM.inputBtn).addEventListener("click", ctrlAddItem);
         document.addEventListener("keypress", (e) => {
             if (e.keyCode === 13 || e.which === 13) {
                 ctrlAddItem();

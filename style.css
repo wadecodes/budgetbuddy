@@ -177,8 +177,13 @@ body {
 
 /***** LISTS *****/
 .container {
+    /* min-width: 1000px; */
     width: 1000px;
     margin: 60px auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+    align-content: right;
 }
 
 .income {
